@@ -1,0 +1,12 @@
+{% extends 'get_seeded_manage/body_GSM.html' %}
+
+{% block content %}
+<div class="content-section btn-light rounded p-4">
+    <div class="py-2">
+            <legend class="border-bottom mb-4">Delete all Candidate</legend>
+            <h2>Are you sure you want to delete All Candidates ?</h2>
+    </div>
+    <a class="btn btn-outline-danger" href="{% url 'deleteAllVoteCodes-GSMV' %}">delete all candidates</a>
+    <a class="btn btn-outline-info" href="{% url 'home-GSMV' %}">Cancel</a>
+</div>
+{% endblock content %}

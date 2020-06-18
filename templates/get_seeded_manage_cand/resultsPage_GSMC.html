@@ -1,0 +1,76 @@
+{% extends 'get_seeded_manage/body_GSM.html' %}
+{% load static %}
+{% block content %}
+    <div class="row ">
+        <div class="col-10  py-3">
+            <h3>Technology</h3>
+            <table class="table rounded table-striped table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Venture</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Votes</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for can in techs %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{ can.venture }}</td>
+                    <td>{{ can.name }}</td>
+                    <td>{{ can.votes }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-10 py-3 ">
+            <h3>General</h3>
+            <table class="table rounded border border-dark table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Venture</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Votes</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for can in gens %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{ can.venture }}</td>
+                    <td>{{ can.name }}</td>
+                    <td>{{ can.votes }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-10 py-3">
+            <h3>Social</h3>
+            <table class="table rounded table-striped table-dark ">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Venture</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Votes</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for can in socs %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{ can.venture }}</td>
+                    <td>{{ can.name }}</td>
+                    <td>{{ can.votes }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock content%}
