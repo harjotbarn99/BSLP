@@ -103,6 +103,8 @@ def castVote(data):
         tech = html.escape(data.get("tech"))
     except VoteCode.DoesNotExist:
         return "Problem with form data "
+    if code == "":
+        return "Vote Code is empty"
     stat = checkCode(code)
     print(stat)
     if stat =="failed":
