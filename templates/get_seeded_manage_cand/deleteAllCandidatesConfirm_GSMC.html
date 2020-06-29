@@ -1,0 +1,12 @@
+{% extends 'get_seeded_manage/body_GSM.html' %}
+
+{% block content %}
+<div class="content-section rounded bg-light p-4">
+    <div>
+            <legend class="border-bottom mb-4">Delete all Candidate</legend>
+            <h2>Are you sure you want to delete All Candidate "</h2>
+    </div>
+    <a class="btn btn-outline-danger" href="{% url 'deleteAllCandidates-GSMC' %}">delete all candidates</a>
+    <a class="btn btn-outline-info" href="{% url 'home-GSMC' %}">Cancel</a>
+</div>
+{% endblock content %}

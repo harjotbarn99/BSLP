@@ -1,0 +1,30 @@
+{% extends 'get_seeded_manage/body_GSM.html' %}
+
+{% load static %}
+{% block content %}
+<div class="container">
+    {% for candidate in candidates %}
+    <article class="media content-section my-2 rounded btn-light p-2">
+        <img class="rounded-circle article-img mr-3 " style="width: 200px; height: 200px;" src="{{ candidate.image.url }}">
+        <div class="media-body">
+            <div class="article-metadata">
+                <small class="mr-2" >{{ candidate.name }} </small>
+                <small class="text-muted mr-2">{{ candidate.category }}</small>  <small class="text-muted">{{ candidate.votes }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'candidateDetail-GSMC' candidate.id %}">{{ candidate.venture }}</a></h2>
+            <p class="article-content">{{ candidate.details }}</p>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endblock content%}
+{% block side %}
+    <a class="btn btn-primary my-3" href="{% url 'addCandidate-GSMC' %}"> Add a candidate </a><br>
+    <a class="btn btn-danger my-3" href="{% url 'deleteAllCandidatesConfirm-GSMC' %}">delete all candidates</a><br>
+    <a class="btn btn-info my-3" href="{% url 'results-GSMC' %}">Get Results</a><br>
+    <a class="btn btn-warning my-3" href="{% url 'clearVotes-GSMC' %}">Clear Votes</a><br>
+{% endblock side %}
+
+
+
+

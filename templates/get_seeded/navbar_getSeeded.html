@@ -1,0 +1,33 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light mb-3" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="{% url 'home-BSLP' %}">
+        <img src="{% static '/images/favicon.ico' %}" width="40" height="40" class="d-inline-block align-top rounded" alt="" loading="lazy">
+    </a>
+    <a class="navbar-brand" href="{% url 'home-getSeeded' %}">Get Seeded</a>
+    <!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+    <!--        <span class="navbar-toggler-icon"></span>-->
+    <!--    </button>   <span class="sr-only">(current)</span>   -->
+
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+<!--            <li class="nav-item ">-->
+<!--                <a class="nav-link" href="#"> Home </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="#">Get Seeded Team</a>-->
+<!--            </li>-->
+        </ul>
+        <ul class="navbar-nav ml-md-auto">
+
+<!--            <li class="nav-item px-2 ">-->
+<!--                <a class="nav-link" href="#"> Candidates </a>-->
+<!--            </li>-->
+            <li class="nav-item px-2">
+                <a class="nav-link" href="{% url 'home-GSV' %}">Vote</a>
+            </li>
+            <li class="nav-item px-2">
+                <a class="nav-link" href="{% url 'home-GSM' %}">Get Seeded Management</a>
+            </li>
+        </ul>
+    </div>
+</nav>

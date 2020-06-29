@@ -41,6 +41,14 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     #  mine
+    'BSLP',
+    'get_seeded',
+    'get_seeded_manage',
+    'get_seeded_manage_cand',
+    'get_seeded_manage_voting',
+    'launchpad_team_auth',
+    'get_seeded_voting',
+
 ]
 
 MIDDLEWARE = [
@@ -132,10 +140,10 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# LOGIN_REDIRECT_URL = 'home-getSeededTeam'
-# LOGIN_URL = 'login-getSeededTeam'
-#
-# LOGOUT_URL = "home-central"
+LOGIN_REDIRECT_URL = 'home-BSLP'
+LOGIN_URL = 'login-LTA'
+
+LOGOUT_URL = "home-BSLP"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

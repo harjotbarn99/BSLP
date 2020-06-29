@@ -1,0 +1,65 @@
+{% extends 'get_seeded_manage/body_GSM.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    {% if 'disabled' in vStat %}
+    <div class="alert alert-danger m-3 p-2">
+        {{ vStat }}
+    </div>
+    {% else %}
+    <div class="alert alert-success m-3 p-2">
+        {{ vStat }}
+    </div>
+    {% endif %}
+    <div class="container px-lg-5 m-2">
+        <div class="row  justify-content-center mx-lg-n5">
+            <div class="col py-3 px-lg-5 border bg-light mr-2 rounded">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'addVoteCodes-GSMV' %}">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Add Vote Codes</legend>
+                        <label for="add">Enter number of Vote Codes to add : </label>
+                        <input id="add" name="number" type="number">
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col py-3 px-lg-5 border bg-light rounded">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'deleteVoteCode-GSMV' %}">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Delete Vote Code</legend>
+                        <label for="del">Enter the a Vote Code to Delete : </label>
+                        <input id="del" name="code"  type="text">
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+<div class="container px-lg-5 bg-light rounded m-2 mt-4">
+    <br>
+    <h3 class="text-center">Vote Codes  -  {{length}}</h3>
+    <div class="row row-cols-5">
+        {% for voteCode in voteCodes %}
+        <div class="col py-3 px-lg-5 ">
+            <p class="btn btn-info"> {{voteCode.code}} </p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock content%}
+
+{% block side %}
+<a class="btn btn-primary my-3"  href="{% url 'changeVotingStatus-GSMV' %}">Change Voting Status</a>
+<a class="btn btn-danger my-3" href="{% url 'deleteAllVoteCodesConfirm-GSMV' %}">delete all votes</a>
+
+{% endblock side %}
