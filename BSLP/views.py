@@ -4,7 +4,6 @@ from django.shortcuts import render
 
 
 def homepage_BSLP(request):
-    map = {
-        "title": "HomePage - BlackStone LaunchPad At UB"
-    }
-    return render(request,"BSLP/home_BSLP.html",map)
+    map = {"title": "HomePage - BlackStone LaunchPad At UB"}
+    return render(request, "BSLP/home_BSLP.html", map)
+

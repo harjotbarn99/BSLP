@@ -13,3 +13,5 @@ BlackStone Launchpad at UB
   use `python manage.py migrate` to set up database
   
   then create a super user to acces the admin site `python manage.py createsuperuser`
+  
+## there will be no candidates or votes in the voting app

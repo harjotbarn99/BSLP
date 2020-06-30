@@ -7,7 +7,7 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView
+    DeleteView,
 )
 from .models import Candidate
 from get_seeded_manage_voting.votingHelper import changeVotingStat
@@ -15,10 +15,11 @@ from django.urls import reverse
 
 # Create your views here.
 
-class CandidatesListViewHome(LoginRequiredMixin, ListView ):
+
+class CandidatesListViewHome(LoginRequiredMixin, ListView):
     model = Candidate
     template_name = "get_seeded_manage_cand/candidatesList_GSMC.html"
-    context_object_name = 'candidates'
+    context_object_name = "candidates"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -27,13 +28,11 @@ class CandidatesListViewHome(LoginRequiredMixin, ListView ):
         return context
 
 
-
 class AddCandidateView(LoginRequiredMixin, CreateView):
     template_name = "get_seeded_manage_cand/addCandidate_GSMC.html"
     model = Candidate
-    fields = ["name", 'category' ,'venture','details']
+    fields = ["name", "category", "venture", "details"]
     # success_url = reverse("home-GSMC")
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -53,10 +52,10 @@ class CandidateDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class CandidateUpdateView(LoginRequiredMixin,UpdateView):
+class CandidateUpdateView(LoginRequiredMixin, UpdateView):
     model = Candidate
     template_name = "get_seeded_manage_cand/candidateUpdate_GSMC.html"
-    fields = ["name", 'category', 'image' ,'venture','details']
+    fields = ["name", "category", "image", "venture", "details"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -76,25 +75,30 @@ class CandidateDeleteView(LoginRequiredMixin, DeleteView):
         context["title"] = title
         return context
 
+
 @login_required
 def deleteAllCandidatesConfirm_GSMC(request):
-    map={"title":"Delete all - Get Seeded Team "}
-    return render(request,"get_seeded_manage_cand/deleteAllCandidatesConfirm_GSMC.html")
+    map = {"title": "Delete all - Get Seeded Team "}
+    return render(
+        request, "get_seeded_manage_cand/deleteAllCandidatesConfirm_GSMC.html"
+    )
 
 
 @login_required
 def deleteAllCandidates_GSMC(request):
     Candidate.objects.all().delete()
-    messages.success(request, f'All Candidates Deleted')
-    return redirect('home-GSMC')
+    messages.success(request, f"All Candidates Deleted")
+    return redirect("home-GSMC")
+
 
 @login_required
 def clearVotes_GSMC(request):
     all = Candidate.objects.all()
     for cand in all:
         cand(votes=0).save()
-    messages.success(request, f'Votes cleared')
-    return redirect('home-GSMC')
+    messages.success(request, f"Votes cleared")
+    return redirect("home-GSMC")
+
 
 @login_required
 def results_GSMC(request):
@@ -104,8 +108,8 @@ def results_GSMC(request):
     socialList = Candidate.objects.filter(category="Social").order_by("-votes")
     context = {
         "techs": techList,
-        "gens" : genList,
-        "socs" : socialList,
-        "title" : "Voting Page - Get Seeded",
+        "gens": genList,
+        "socs": socialList,
+        "title": "Voting Page - Get Seeded",
     }
     return render(request, "get_seeded_manage_cand/resultsPage_GSMC.html", context)

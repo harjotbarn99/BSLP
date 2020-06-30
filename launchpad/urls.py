@@ -20,10 +20,9 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("",include("BSLP.urls")),
-    path("auth/",include('launchpad_team_auth.urls')),
-
+    path("admin/", admin.site.urls),
+    path("", include("BSLP.urls")),
+    path("auth/", include("launchpad_team_auth.urls")),
 ]
 
 if settings.DEBUG:

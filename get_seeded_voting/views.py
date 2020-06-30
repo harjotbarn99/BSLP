@@ -5,6 +5,7 @@ from django.contrib import messages
 
 # Create your views here.
 
+
 def votingPage_GSV(request):
     if request.method == "GET":
         techList = Candidate.objects.filter(category="Technology")
@@ -12,10 +13,10 @@ def votingPage_GSV(request):
         socialList = Candidate.objects.filter(category="Social")
         context = {
             "techs": techList,
-            "gens" : genList,
-            "socs" : socialList,
-            "title" : "Voting Page - Get Seeded",
-            "vStat": getVotingStatus()
+            "gens": genList,
+            "socs": socialList,
+            "title": "Voting Page - Get Seeded",
+            "vStat": getVotingStatus(),
         }
         return render(request, "get_seeded_voting/votingPage_GSV.html", context)
     elif request.method == "POST":
@@ -29,12 +30,10 @@ def votingPage_GSV(request):
             "gens": genList,
             "socs": socialList,
             "title": "Voting Page - Get Seeded",
-            "vStat": getVotingStatus()
+            "vStat": getVotingStatus(),
         }
         messages.success(request, message)
         return render(request, "get_seeded_voting/votingPage_GSV.html", context)
-    context = {
-        "title" : "Voting Page - Get Seeded"
-    }
+    context = {"title": "Voting Page - Get Seeded"}
     messages.error(request, "problem during loading page")
     return render(request, "get_seeded_voting/votingPage_GSV.html", context)
