@@ -60,6 +60,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+db2.sqlite3
 
 # Flask stuff:
 instance/
@@ -131,3 +132,6 @@ dmypy.json
 
 # vs code
 .vscode
+
+#  vote codes csv file
+current.csv
