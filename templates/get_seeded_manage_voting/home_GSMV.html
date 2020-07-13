@@ -14,7 +14,7 @@
     {% endif %}
     <div class="container px-lg-5 m-2">
         <div class="row  justify-content-center mx-lg-n5">
-            <div class="col py-3 px-lg-5 border bg-light mr-2 rounded">
+            <div class="col-auto col-sm-12 py-3 px-lg-5 border bg-light mr-2 rounded">
                 <form method="POST" enctype="multipart/form-data" action="{% url 'addVoteCodes-GSMV' %}">
                     {% csrf_token %}
                     <fieldset class="form-group">
@@ -27,7 +27,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col py-3 px-lg-5 border bg-light rounded">
+            <div class="col-auto col-sm-12 py-3 px-lg-5 border bg-light rounded">
                 <form method="POST" enctype="multipart/form-data" action="{% url 'deleteVoteCode-GSMV' %}">
                     {% csrf_token %}
                     <fieldset class="form-group">
@@ -40,6 +40,19 @@
                     </div>
                 </form>
             </div>
+             <div class="col-auto col-sm-12 py-3 px-lg-5 border bg-light rounded">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'addByCSVcheckin-GSMV' %}">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Add votecode by csv</legend>
+                        <label for="file"> Updolad checkin csv file : </label>
+                        <input id="file" name="csvCheckin"  type="file">
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -47,9 +60,9 @@
 <div class="container px-lg-5 bg-light rounded m-2 mt-4">
     <br>
     <h3 class="text-center">Vote Codes  -  {{length}}</h3>
-    <div class="row row-cols-5">
+    <div class="row ">
         {% for voteCode in voteCodes %}
-        <div class="col py-3 px-lg-5 ">
+        <div class="col-3 ">
             <p class="btn btn-info"> {{voteCode.code}} </p>
         </div>
         {% endfor %}
