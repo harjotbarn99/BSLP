@@ -1,8 +1,11 @@
 import string
 import random
-from .models import VoteCode
+import csv
 import html
+
+from .models import VoteCode
 from get_seeded_manage_cand.models import Candidate
+
 
 # generates a random string with numAlph alphabets and numNum  numbers
 def randomCode(numAlph, numNum):
@@ -15,6 +18,50 @@ def randomCode(numAlph, numNum):
     for i in random.sample(code, len(code)):
         finalCode += i
     return finalCode
+
+
+def checkCode(codeRaw):
+    codeUpperCase = codeRaw.upper()
+    try:
+        obj = VoteCode.objects.get(code=codeUpperCase)
+        return True
+    except VoteCode.DoesNotExist:
+        return False
+
+
+def add_vote_code(code_):
+    stat = checkCode(code_)
+    if not stat:
+        VoteCode.objects.create(code=code_).save()
+        return True
+    else:
+        return False
+
+
+def addVoteCodes(num):
+    i = 0
+    while i != num:
+        code_ = randomCode(4, 2)
+        if add_vote_code(code_):
+            i += 1
+    return "done"
+
+
+def addByCsv(file, to_leave=7, index=-1):
+    with open("current.csv", "wb") as f:
+        f.write(file)
+    with open("current.csv", "r") as r:
+        data = csv.reader(r)
+        i = 0
+        for line in data:
+            i += 1
+            if i < to_leave:
+                continue
+            code_ = line[-1]
+            if code_ == "":
+                code_ = line[2]
+            add_vote_code(code_)
+    return i - to_leave + 1
 
 
 # Voting status
@@ -50,24 +97,6 @@ def changeVotingStat():
 
 def getVotingStatus():
     return votingStatus
-
-
-def addVoteCodes(num):
-    for i in range(int(num)):
-        code_ = randomCode(4, 2)
-        VoteCode.objects.create(code=code_).save()
-    return "done"
-
-
-def checkCode(codeRaw):
-    codeUpperCase = codeRaw.upper()
-    toRet = ""
-    try:
-        obj = VoteCode.objects.get(code=codeUpperCase)
-        toRet = "success"
-    except VoteCode.DoesNotExist:
-        toRet = "failed"
-    return toRet
 
 
 def deleteVoteCode(codeRaw):
@@ -113,7 +142,6 @@ def voteIncrement(vent, category):
 
 
 def castVote(data):
-    print(data)
     if votingStatus == "Voting is disabled":
         return votingStatus + ", please wait for the Get seeded team to enable it"
     try:
@@ -127,10 +155,8 @@ def castVote(data):
         return "Vote Code is empty"
     stat = checkCode(code)
     print(stat)
-    if stat == "failed":
+    if not stat:
         return "Wrong vote code"
-    elif stat != "success":
-        return "problem in castVote"
     else:
         deleteVoteCode(code)
         li = [
@@ -138,6 +164,5 @@ def castVote(data):
             voteIncrement(soc, "Social"),
             voteIncrement(tech, "Technology"),
         ]
-        print(li)
         return voteMessage(li)
 

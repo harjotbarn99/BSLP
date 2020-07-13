@@ -6,9 +6,11 @@ from .votingHelper import (
     addVoteCodes,
     checkCode,
     deleteVoteCode,
+    addByCsv,
 )
 from .models import VoteCode
 from django.contrib import messages
+
 
 # Create your views here.
 
@@ -29,7 +31,7 @@ def home_GSMV(request):
 @login_required
 def addVoteCodes_GSMV(request):
     num = request.POST.get("number")
-    addVoteCodes(num)
+    addVoteCodes(int(num))
     messages.success(request, f"{num} Vote Codes Added")
     return redirect("home-GSMV")
 
@@ -38,10 +40,10 @@ def addVoteCodes_GSMV(request):
 def deleteVoteCode_GSMV(request):
     code = request.POST.get("code")
     status = checkCode(code)
-    if status == "failed":
+    if not status:
         messages.error(request, f"{code} is not a valid Vote Code")
         return redirect("home-GSMV")
-    elif status == "success":
+    elif status:
         deleteVoteCode(code)
         messages.success(request, f"Vote Codes deleted")
         return redirect("home-GSMV")
@@ -71,3 +73,10 @@ def changeVotingStat_GSMV(request):
     message = changeVotingStat()
     return redirect("home-GSMV")
 
+
+@login_required
+def add_votes_by_csv_checkin(request):
+    file = request.FILES.get("csvCheckin").read()
+    msg = addByCsv(file)
+    messages.success(request, f"{msg} Vote Codes Added")
+    return redirect("home-GSMV")

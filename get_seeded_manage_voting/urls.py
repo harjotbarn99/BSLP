@@ -6,6 +6,7 @@ from .views import (
     addVoteCodes_GSMV,
     deleteAllVoteCodes_GSMV,
     changeVotingStat_GSMV,
+    add_votes_by_csv_checkin,
 )
 
 
@@ -24,5 +25,8 @@ urlpatterns = [
     path("addVoteCodes/", addVoteCodes_GSMV, name="addVoteCodes-GSMV"),
     path("deleteVoteCode/", deleteVoteCode_GSMV, name="deleteVoteCode-GSMV"),
     path("changeVotingStat/", changeVotingStat_GSMV, name="changeVotingStatus-GSMV"),
+    path(
+        "csvAddCheckinVoteCodes/", add_votes_by_csv_checkin, name="addByCSVcheckin-GSMV"
+    ),
 ]
 
