@@ -2,7 +2,7 @@ from .base import *
 import os
 import django_heroku
 
-ALLOWED_HOSTS = ["get-seeded.herokuapp.com"]
+ALLOWED_HOSTS = ["gs-voting.herokuapp.com"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
