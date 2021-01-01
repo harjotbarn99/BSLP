@@ -5,7 +5,7 @@ import django_heroku
 ALLOWED_HOSTS = ["gs-voting.herokuapp.com"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
