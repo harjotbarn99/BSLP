@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     #     tpp
     "crispy_forms",
+    "storages",
     #  mine
     "BSLP",
     "get_seeded",

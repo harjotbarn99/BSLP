@@ -18,7 +18,8 @@ gunicorn = "*"
 pillow = "8.0.1"
 psycopg2 = "*"
 django-heroku = "*"
+boto3 = "*"
+django-storages = "*"
 
 [requires]
 python_version = "3.9"
-

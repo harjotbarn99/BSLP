@@ -30,10 +30,10 @@ class Candidate(models.Model):
         self.save()
         return
 
-    def save(self, *args, **kwargs):
-        super().save()
-        img = Image.open(self.image.path)
-        if img.height > 500 or img.width > 500:
-            outputSize = (500, 500)
-            img.thumbnail(outputSize)
-            img.save(self.image.path)
+    # def save(self, *args, **kwargs):
+    #     super().save()
+    #     img = Image.open(self.image.path)
+    #     if img.height > 500 or img.width > 500:
+    #         outputSize = (500, 500)
+    #         img.thumbnail(outputSize)
+    #         img.save(self.image.path)
