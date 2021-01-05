@@ -31,8 +31,11 @@ def home_GSMV(request):
 @login_required
 def addVoteCodes_GSMV(request):
     num = request.POST.get("number")
-    addVoteCodes(int(num))
-    messages.success(request, f"{num} Vote Codes Added")
+    ret = addVoteCodes(int(num))
+    if ret == "done":
+        messages.success(request, f"{num} Vote Codes Added")
+    else :
+        messages.error(request, f"after adding {num} into Vote Codes it would exceed the max allowed anmount of 1000. Please delete Vote Codes first to add them.")
     return redirect("home-GSMV")
 
 

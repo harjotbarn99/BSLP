@@ -39,6 +39,8 @@ def add_vote_code(code_):
 
 
 def addVoteCodes(num):
+    if len(VoteCode.objects.all()) + num > 1000:
+        return "failed"
     i = 0
     while i != num:
         code_ = randomCode(4, 2)
