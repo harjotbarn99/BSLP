@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from PIL import Image
+from django.core.files.storage import default_storage
 
 # Create your models here.
 
@@ -30,10 +31,9 @@ class Candidate(models.Model):
         self.save()
         return
 
-    # def save(self, *args, **kwargs):
-    #     super().save()
-    #     img = Image.open(self.image.path)
-    #     if img.height > 500 or img.width > 500:
-    #         outputSize = (500, 500)
-    #         img.thumbnail(outputSize)
-    #         img.save(self.image.path)
+    def save(self, *args, **kwargs):
+        name = self.image.name
+        super().save(*args, **kwargs)
+        if (name != "user.png"):
+            default_storage.delete('profile_pics/my-pic.jpg')
+
