@@ -35,5 +35,5 @@ class Candidate(models.Model):
         name = self.image.name
         super().save(*args, **kwargs)
         if (name != "user.png"):
-            default_storage.delete('profile_pics/my-pic.jpg')
+            default_storage.delete(name)
 

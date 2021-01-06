@@ -59,7 +59,7 @@ def deleteVoteCode_GSMV(request):
 def deleteAllVoteCodesConfirm_GSMV(request):
     return render(
         request,
-        "get_seeded_manage_voting/deleteAllVoteCodesConfirm_GSMV.html",
+        "get_seeded_manage_voting/deleteAllVotecodesConfirm_GSMV.html",
         {"title": "Confirm Deleting All Vote Codes"},
     )
 
