@@ -33,7 +33,9 @@ class Candidate(models.Model):
 
     def save(self, *args, **kwargs):
         name = self.image.name
+        print("\nsave fired with name ",name,"\n")
         super().save(*args, **kwargs)
         if (name != "user.png"):
+            print("deleting and the file exists -> ",default_storage.exists(name))
             default_storage.delete(name)
 
