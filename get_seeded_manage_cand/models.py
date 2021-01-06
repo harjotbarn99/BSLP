@@ -6,6 +6,9 @@ from django.core.files.storage import default_storage
 
 # Create your models here.
 
+class CandidatePhoto(models.Model):
+    venture_name = models.CharField(max_length=100, blank=True)
+    image_name = models.TextField(blank=True)
 
 class Candidate(models.Model):
     class Categories(models.TextChoices):
@@ -16,7 +19,7 @@ class Candidate(models.Model):
     name = models.CharField(max_length=100)
     venture = models.CharField(max_length=100)
     category = models.CharField(choices=Categories.choices, max_length=10)
-    details = models.TextField(blank=True, null=True)
+    details = models.TextField(blank=True,default="")
     votes = models.SmallIntegerField(default=0)
     image = models.ImageField(default="user.png", upload_to="profile_pics")
 
@@ -32,10 +35,16 @@ class Candidate(models.Model):
         return
 
     def save(self, *args, **kwargs):
-        name = self.image.name
-        print("\nsave fired with name ",name,"\n")
-        super().save(*args, **kwargs)
-        if (name != "user.png"):
-            print("deleting and the file exists -> ",default_storage.exists(name))
-            default_storage.delete(name)
-
+        super.save(*args, **kwargs)
+        photoLi = CandidatePhoto.objects.filter(venture_name=self.venture)
+        if photoLi.count == 0:
+            CandidatePhoto.objects.create(venture_name=self.venture,image_name=self.image.name)
+            print("got new pic with \nname =",self.image.name,"\n url = ",self.image.url)
+        else:
+            photo = photoLi[0]
+            if photo.name != "user.png":
+                ex = default_storage.exists(photo.name)
+                print("exists = ",ex)
+                print("replacing ",photo.name, " with ",self.image.name)
+                print("url = ",self.image.url)
+            photo.image_name=self.image.name
