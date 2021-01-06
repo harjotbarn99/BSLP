@@ -34,8 +34,12 @@ class Candidate(models.Model):
         self.save()
         return
 
+    def delete(self,*args, **kwargs ):
+        CandidatePhoto.objects.filter(venture_name=self.venture)
+        return super().delete(*args, **kwargs)
+
     def save(self, *args, **kwargs):
-        super.save(*args, **kwargs)
+        super().save(*args, **kwargs)
         photoLi = CandidatePhoto.objects.filter(venture_name=self.venture)
         if photoLi.count == 0:
             CandidatePhoto.objects.create(venture_name=self.venture,image_name=self.image.name)
@@ -48,3 +52,4 @@ class Candidate(models.Model):
                 print("replacing ",photo.name, " with ",self.image.name)
                 print("url = ",self.image.url)
             photo.image_name=self.image.name
+            photo.save()
