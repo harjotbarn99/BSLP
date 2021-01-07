@@ -37,13 +37,10 @@ class Candidate(models.Model):
     def delete(self,*args, **kwargs ):
         li = CandidatePhoto.objects.filter(venture_name=self.venture)
         super().delete(*args, **kwargs)
-        print("delete trigerred ",li.count())
         if li.count() == 1:
             photo = li[0]
             if photo.image_name != "user.png" and default_storage.exists("profile_pics/"+photo.image_name):
-                print("deleting ",photo.image_name)
                 default_storage.delete("profile_pics/"+photo.image_name)
-            print("deleting objext ")
             photo.delete()
         else :
             print("error")
@@ -51,20 +48,12 @@ class Candidate(models.Model):
 
     def save(self, *args, **kwargs):
         photoLi = CandidatePhoto.objects.filter(venture_name=self.venture)
-        print(photoLi.count())
         if photoLi.count() == 0:
             CandidatePhoto.objects.create(venture_name=self.venture,image_name=self.image.name)
-            print("got new pic with \nname =",self.image.name,"\nurl = ",self.image.url)
         elif photoLi.count() == 1:
             photo = photoLi[0]
-            if photo.image_name != "user.png":
-                ex = default_storage.exists("profile_pics/"+photo.image_name)
-                print("got existing pic with \nname =",self.image.name,"\nurl = ",self.image.url)
-                print("exists = ",ex)
-                if ex :
-                    print("deleting ",photo.image_name)
-                    default_storage.delete("profile_pics/"+photo.image_name)
-            print("replacing ",photo.image_name, " with ",self.image.name)
+            if photo.image_name != "user.png" and default_storage.exists("profile_pics/"+photo.image_name):
+                default_storage.delete("profile_pics/"+photo.image_name)
             photo.image_name=self.image.name
             photo.save()
         else:
