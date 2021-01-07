@@ -35,21 +35,38 @@ class Candidate(models.Model):
         return
 
     def delete(self,*args, **kwargs ):
-        CandidatePhoto.objects.filter(venture_name=self.venture)
-        return super().delete(*args, **kwargs)
+        li = CandidatePhoto.objects.filter(venture_name=self.venture)
+        super().delete(*args, **kwargs)
+        print("delete trigerred ",li.count())
+        if li.count() == 1:
+            photo = li[0]
+            if photo.image_name != "user.png" and default_storage.exists("profile_pics/"+photo.image_name):
+                print("deleting ",photo.image_name)
+                default_storage.delete("profile_pics/"+photo.image_name)
+            print("deleting objext ")
+            photo.delete()
+        else :
+            print("error")
+        return 
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
         photoLi = CandidatePhoto.objects.filter(venture_name=self.venture)
-        if photoLi.count == 0:
+        print(photoLi.count())
+        if photoLi.count() == 0:
             CandidatePhoto.objects.create(venture_name=self.venture,image_name=self.image.name)
-            print("got new pic with \nname =",self.image.name,"\n url = ",self.image.url)
-        else:
+            print("got new pic with \nname =",self.image.name,"\nurl = ",self.image.url)
+        elif photoLi.count() == 1:
             photo = photoLi[0]
-            if photo.name != "user.png":
-                ex = default_storage.exists(photo.name)
+            if photo.image_name != "user.png":
+                ex = default_storage.exists("profile_pics/"+photo.image_name)
+                print("got existing pic with \nname =",self.image.name,"\nurl = ",self.image.url)
                 print("exists = ",ex)
-                print("replacing ",photo.name, " with ",self.image.name)
-                print("url = ",self.image.url)
+                if ex :
+                    print("deleting ",photo.image_name)
+                    default_storage.delete("profile_pics/"+photo.image_name)
+            print("replacing ",photo.image_name, " with ",self.image.name)
             photo.image_name=self.image.name
             photo.save()
+        else:
+            print("\n\n------------------error-------------------\n\n")
+        return super().save(*args, **kwargs)

@@ -11,7 +11,7 @@ from django.views.generic import (
 )
 from .models import Candidate
 from get_seeded_manage_voting.votingHelper import changeVotingStat
-from django.urls import reverse
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -32,7 +32,7 @@ class AddCandidateView(LoginRequiredMixin, CreateView):
     template_name = "get_seeded_manage_cand/addCandidate_GSMC.html"
     model = Candidate
     fields = ["name", "category", "venture", "details"]
-    # success_url = reverse("home-GSMC")
+    # success_url = reverse_lazy("home-GSMC")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -67,7 +67,7 @@ class CandidateUpdateView(LoginRequiredMixin, UpdateView):
 class CandidateDeleteView(LoginRequiredMixin, DeleteView):
     model = Candidate
     template_name = "get_seeded_manage_cand/candidateDelete_GSMC.html"
-    # success_url = reverse("home-GSMC")
+    success_url = reverse_lazy("home-GSMC")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
