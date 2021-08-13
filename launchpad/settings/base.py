@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "get_seeded_manage",
     "get_seeded_manage_cand",
     "get_seeded_manage_voting",
-    "launchpad_team_auth",
+    # "launchpad_team_auth",
     "get_seeded_voting",
 ]
 
@@ -119,13 +119,13 @@ MEDIA_URL = "/media/"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_REDIRECT_URL = "home-BSLP"
-LOGIN_URL = "login-LTA"
+LOGIN_URL = "admin:login"
 
 LOGOUT_URL = "home-BSLP"
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get("EMAIL_USER_DJ")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASS_DJ")
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.environ.get("EMAIL_USER_DJ")
+# EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASS_DJ")

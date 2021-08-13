@@ -17,6 +17,7 @@ def votingPage_GSV(request):
             "socs": socialList,
             "title": "Voting Page - Get Seeded",
             "vStat": getVotingStatus(),
+            "authenticated": request.user.is_authenticated
         }
         return render(request, "get_seeded_voting/votingPage_GSV.html", context)
     elif request.method == "POST":

@@ -1,9 +1,16 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-light mb-3" style="background-color: #e3f2fd;">
+    {% if authenticated %}
     <a class="navbar-brand" href="{% url 'home-BSLP' %}">
         <img src="{% static 'images/favicon.ico' %}" width="40" height="40" class="d-inline-block align-top rounded" alt="" loading="lazy">
     </a>
     <a class="navbar-brand" href="{% url 'home-getSeeded' %}">Get Seeded</a>
+    {% else %}
+    <a class="navbar-brand" href="{% url 'home-GSV' %}">
+        <img src="{% static 'images/favicon.ico' %}" width="40" height="40" class="d-inline-block align-top rounded" alt="" loading="lazy">
+    </a>
+    <a class="navbar-brand" href="{% url 'home-GSV' %}">Get Seeded</a>
+    {% endif %}
     <!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
     <!--        <span class="navbar-toggler-icon"></span>-->
     <!--    </button>   <span class="sr-only">(current)</span>   -->
