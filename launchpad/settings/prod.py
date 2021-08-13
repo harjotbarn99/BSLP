@@ -2,6 +2,8 @@ from .base import *
 import os
 import django_heroku
 
+USE_TZ = True
+
 ALLOWED_HOSTS = ["gs-voting.herokuapp.com"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
