@@ -21,6 +21,7 @@ psycopg2 = "*"
 django-heroku = "*"
 boto3 = "*"
 django-storages = "*"
+dropbox="*"
 
 [requires]
 python_version = "3.9"
