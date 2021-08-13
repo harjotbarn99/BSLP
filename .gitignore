@@ -133,6 +133,10 @@ dmypy.json
 # vs code
 .vscode
 
+
+.idea
+
+
 #  vote codes csv file
 current.csv
 
